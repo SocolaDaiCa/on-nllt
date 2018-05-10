@@ -5,7 +5,7 @@
  * @Email: TokenTien@gmail.com
  * @Date:   2018-05-10 07:21:57
  * @Last Modified by:   Socola
- * @Last Modified time: 2018-05-10 08:07:08
+ * @Last Modified time: 2018-05-10 14:44:57
  */
 /* Connect*/
 $conn = new mysqli('localhost', 'root', '', 'db');
@@ -20,8 +20,11 @@ if(!empty($_GET['delete'])){
 	}	
 }
 /* Select */
-$sql = "SELECT * FROM users";
-$result = $conn->query($sql);
+$limit = 2;
+$page = $_GET['page'] ?? 1;
+$totalPage =  $conn->query("select count(*) as c from users")->fetch_assoc()['c'] / $limit;
+$since = ($page - 1) * $limit;
+$result = $conn->query("SELECT * FROM users limit $since, $limit");
 ?>
 	<a href="them.php" title="">Thêm</a>
 	<a href="dangnhap.php" title="">Đăng nhập</a>
@@ -46,3 +49,6 @@ $result = $conn->query($sql);
 			<?php endwhile ?>
 		</tbody>
 	</table>
+	<?php for($i = 1; $i<= $totalPage; $i++): ?>
+		<a href="index.php?page=<?php echo$i ?>"><?php echo $i; ?></a>
+	<?php endfor ?>

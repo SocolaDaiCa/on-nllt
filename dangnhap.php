@@ -5,7 +5,7 @@
  * @Email: TokenTien@gmail.com
  * @Date:   2018-05-10 07:44:30
  * @Last Modified by:   Socola
- * @Last Modified time: 2018-05-10 08:08:11
+ * @Last Modified time: 2018-05-10 14:36:37
  */
 if(!empty($_POST)){
 	/* Connect */
@@ -22,6 +22,7 @@ if(!empty($_POST)){
 		echo "đăng nhập thất bại";
 	}
 }
+
 ?>
 <form action="dangnhap.php" method="POST" accept-charset="utf-8">
 	Username: <input type="text" name="username"><br>
